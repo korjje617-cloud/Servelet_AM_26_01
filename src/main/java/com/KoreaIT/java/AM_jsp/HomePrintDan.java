@@ -14,6 +14,7 @@ public class HomePrintDan extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.getRequestDispatcher("/jsp/home/printDan.jsp").forward(request, response);
+		/*이 주소가 호출되면 요청을 jsp 파일로 옮겨준다*/
 	}
 
 }

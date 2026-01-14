@@ -19,6 +19,11 @@ public class PrintDanServlet extends HttpServlet {
 		String inputDan = request.getParameter("dan");
 		String inputLimit = request.getParameter("limit");
 		String inputColor = request.getParameter("color");
+		
+		/* html 쓰는 방법
+		 * http://localhost:8090/Servelet_AM_26_01/printDan?dan=123&limit=5&color=red
+		 * 주소 ? dan=123 & limit=5 & color=red 
+		 */
 
 		System.out.println(inputColor);
 

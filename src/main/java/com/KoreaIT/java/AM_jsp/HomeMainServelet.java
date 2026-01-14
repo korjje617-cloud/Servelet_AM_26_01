@@ -11,7 +11,7 @@ import java.io.IOException;
 public class HomeMainServelet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Hello World").append(request.getContextPath());
 	}
 
 }
