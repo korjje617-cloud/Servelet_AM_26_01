@@ -32,7 +32,7 @@ List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getA
 	</ul>
 
 	<ul>
-		<h2>자동 추가</h2>
+		<h2>자동 추가1</h2>
 		<%
 		for (int i = 0; i < articleRows.size(); i++) {
 		%>
@@ -42,5 +42,18 @@ List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getA
 		}
 		%>
 	</ul>
+	
+		<ul>
+		<h2>자동 추가2</h2>
+		<%
+		for (Map<String, Object> articleRow : articleRows) {
+		%>
+		<li><%=articleRow.get("id")%> 번, <%=articleRow.get("regDate")%>,
+			<%=articleRow.get("title")%>, <%=articleRow.get("body")%></li>
+		<%
+		}
+		%>
+	</ul>
+	
 </body>
 </html>
