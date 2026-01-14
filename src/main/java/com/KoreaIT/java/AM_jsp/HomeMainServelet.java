@@ -1,5 +1,7 @@
 package com.KoreaIT.java.AM_jsp;
 
+/*자바처럼 쓸 수 있음*/
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

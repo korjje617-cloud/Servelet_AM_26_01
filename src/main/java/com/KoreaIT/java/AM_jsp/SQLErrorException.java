@@ -1,5 +1,7 @@
 package com.KoreaIT.java.AM_jsp;
 
+/*자바처럼 쓸 수 있음*/
+
 public class SQLErrorException extends RuntimeException {
 	private Exception origin;
 

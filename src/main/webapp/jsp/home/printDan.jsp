@@ -12,9 +12,9 @@ String color = request.getParameter("color");
 <meta charset="UTF-8">
 <title>구구단 출력 Page</title>
 <style>
-.color {
-	color: <%=color%>;
-}
+	.color {
+		color: <%=color%>;
+	}
 </style>
 </head>
 <body class="color">
@@ -24,19 +24,15 @@ String color = request.getParameter("color");
 		==<%=dan%>단==
 	</h2>
 	<div>
-		<%
-		for (int i = 1; i <= limit; i++) {
-		%>
-		<%-- 	<div style="color:<%=color%>"><%=dan %> * <%=i %> = <%=dan * i %></div> --%>
-		<div><%=dan%>
-			*
-			<%=i%>
-			=
-			<%=dan * i%></div>
-
-		<%
+	<%
+		for(int i = 1; i <= limit; i++){
+	%>
+<%-- 	<div style="color:<%=color%>"><%=dan %> * <%=i %> = <%=dan * i %></div> --%>
+	<div><%=dan %> * <%=i %> = <%=dan * i %></div>
+	
+	<%
 		}
-		%>
+	%>
 	</div>
 </body>
 </html>
