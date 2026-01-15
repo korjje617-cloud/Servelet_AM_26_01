@@ -13,6 +13,9 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 <title>게시글 상세보기</title>
 </head>
 <body>
+
+	<a href="../article/list">리스트로 이동</a>
+	
 	<h1>게시글 상세보기</h1>
 
 

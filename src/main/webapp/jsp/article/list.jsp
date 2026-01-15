@@ -1,13 +1,11 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%
 List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getAttribute("articleRows");
 %>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -16,15 +14,9 @@ List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getA
 <title>게시글 목록</title>
 </head>
 <body>
-
+	<a href="../home/main">메인으로 이동</a>
+	
 	<h1>게시글 목록</h1>
-
-	<a href="https://www.naver.com" target="_blank">네이버</a>
-	<a href="http://localhost:8080/Servlet_AM_26_01/article/list"
-		target="_blank">리스트 새 탭</a>
-
-	<a href="http://localhost:8080/Servlet_AM_26_01/article/detail"
-		target="_blank">상세보기 새 탭</a>
 
 	<ul>
 		<%
@@ -37,6 +29,6 @@ List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getA
 		}
 		%>
 	</ul>
-	
+
 </body>
 </html>

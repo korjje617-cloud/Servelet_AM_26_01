@@ -1,4 +1,4 @@
-package com.KoreaIT.java.AM_jsp;
+package com.KoreaIT.java.AM_jsp.exeption;
 
 /*자바처럼 쓸 수 있음*/
 
