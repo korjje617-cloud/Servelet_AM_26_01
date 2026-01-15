@@ -1,0 +1,16 @@
+게시글 삭제
+
+DELETE * FROM article WHERE id = %d
+
+디테일에 삭제 링크를 넣고
+링크를 누르면 삭제 확인 페이지로 이동
+yes 누르면 삭제 페이지
+no 누르면 게시글 상세보기 페이지
+
+check jsp 랑 check 서블릿
+delete jsp랑 delete 서블릿
+
+delete 서블릿에는 삭제쿼리 필요
+
+어차피 글 하나를 찾아야하니까 detail 복붙
+

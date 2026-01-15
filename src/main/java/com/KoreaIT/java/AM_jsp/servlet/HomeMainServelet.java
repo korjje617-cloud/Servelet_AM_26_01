@@ -1,4 +1,4 @@
-package com.KoreaIT.java.AM_jsp.servelet;
+package com.KoreaIT.java.AM_jsp.servlet;
 
 /*자바처럼 쓸 수 있음*/
 

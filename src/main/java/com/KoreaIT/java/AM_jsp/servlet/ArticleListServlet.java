@@ -1,4 +1,4 @@
-package com.KoreaIT.java.AM_jsp.servelet;
+package com.KoreaIT.java.AM_jsp.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,15 +16,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/article/detail")
-public class ArticleDetailServlet extends HttpServlet {
+@WebServlet("/article/list")
+public class ArticleListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
-
-		System.out.println(123);
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -43,19 +41,19 @@ public class ArticleDetailServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공");
 
-			int id = Integer.parseInt(request.getParameter("id"));
-
-//			String sql = String.format("SELECT * FROM article WHERE id = %d;", id);
-
+//			String sql = "SELECT * FROM article ORDER BY id DESC;";
+			
 			SecSql sql = SecSql.from("SELECT *");
 			sql.append("FROM article");
-			sql.append("WHERE id = ?", id);
+			sql.append("ORDER BY id DESC");
 
-			Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
+			List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
 
-			request.setAttribute("articleRow", articleRow);
+			request.setAttribute("articleRows", articleRows);
 
-			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
+//			response.getWriter().append(articleRows.toString());
+
+			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
