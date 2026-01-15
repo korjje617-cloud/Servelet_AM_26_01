@@ -41,6 +41,14 @@ public class ArticleDetailServlet extends HttpServlet {
 			response.getWriter().append("연결 성공");
 
 			DBUtil dbUtil = new DBUtil(request, response);
+			
+			int id = Integer.parseInt(request.getParameter("id"));
+
+			String sql = String.format("SELECT * FROM article WHERE id = %d;", id);
+
+			Map<String, Object> articleRow = dbUtil.selectRow(conn, sql);
+
+			request.setAttribute("articleRow", articleRow);
 
 			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
 			
