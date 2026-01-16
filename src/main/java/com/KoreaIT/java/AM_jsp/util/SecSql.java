@@ -1,7 +1,5 @@
 package com.KoreaIT.java.AM_jsp.util;
 
-/*자바처럼 쓸 수 있음*/
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SecSql {
-	
+
 	private StringBuilder sqlBuilder;
 	private List<Object> datas;
 
