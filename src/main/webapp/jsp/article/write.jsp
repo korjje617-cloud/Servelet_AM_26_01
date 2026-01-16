@@ -6,11 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 작성</title>
-<style>
-table>thead>tr>th, table>tbody>tr>td {
-	padding: 10px;
-}
-</style>
 </head>
 <body>
 

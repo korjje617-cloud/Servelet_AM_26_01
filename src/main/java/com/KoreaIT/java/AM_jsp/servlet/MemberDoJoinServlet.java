@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Map;
 
 import com.KoreaIT.java.AM_jsp.util.DBUtil;
 import com.KoreaIT.java.AM_jsp.util.SecSql;
@@ -15,8 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/article/modify")
-public class ArticleModifyServlet extends HttpServlet {
+@WebServlet("/member/doJoin")
+public class MemberDoJoinServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,22 +39,25 @@ public class ArticleModifyServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공");
 
-			int id = Integer.parseInt(request.getParameter("id"));
-
-			SecSql sql = SecSql.from("SELECT *");
-			sql.append("FROM article");
-			sql.append("WHERE id = ?", id);
-
-			Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
+			String loginId = request.getParameter("loginId");
+			String loginPw = request.getParameter("loginPw");
+			String loginPwContirm = request.getParameter("loginPwConfirm");	
+			String name = request.getParameter("name");
 			
-			if(articleRow == null) {
-				response.getWriter()
-				.append(String.format("<script>alert('%d번 글은 없습니다'); location.replace('list');</script>", id));
-			}
+			SecSql sql = SecSql.from("INSERT INTO Member");
+			sql.append("regDate = NOW(),");
+			sql.append("loginId = ?,", loginId);
+			sql.append("loginPw = ?;", loginPw);
+			sql.append("`name` = ?;", name);
+			
 
-			request.setAttribute("articleRow", articleRow);
+			int id = DBUtil.insert(conn, sql);<<<<<<
+			System.out.println(1);
 
-			request.getRequestDispatcher("/jsp/article/modify.jsp").forward(request, response);
+			response.getWriter()
+					.append(String.format("<script>alert('%s 님 가입이 완료 되었습니다'); location.replace('list');</script>", name));
+			
+			
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
@@ -68,6 +70,11 @@ public class ArticleModifyServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }
