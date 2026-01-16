@@ -39,6 +39,7 @@ table>thead>tr>th, table>tbody>tr>td {
 				<th>제목</th>
 				<th>내용</th>
 				<th>삭제</th>
+				<th>수정</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,8 +54,10 @@ table>thead>tr>th, table>tbody>tr>td {
 
 				<td><%=articleRow.get("body")%></td>
 				<td><a
-						onclick="if(confirm('삭제하시겠습니까?') == false) {return false;}"
-						href="doDelete?id=<%=articleRow.get("id")%>">del</a></td>
+					onclick="if(confirm('삭제하시겠습니까?') == false) {return false;}"
+					href="doDelete?id=<%=articleRow.get("id")%>">del</a></td>
+					
+				<td><a href="doUpdate?id=<%=articleRow.get("id")%>">수정</a></td>
 			</tr>
 			<%
 			}

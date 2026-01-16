@@ -1,0 +1,22 @@
+수정 버튼 누르고 수정 창이 떴을 때
+수정 전 데이터를 가져와야함
+글도 댓글도 수정할 때 아예 처음부터 쓰는 경우는 없으니까
+
+id로 글 데이터 하나를 가져와야 하고
+body 랑 title 을 까야함
+title에는 value="<%=articleRow.get("title")%> 을 넣고
+body 에는 아예 textarea 태그의 자식으로 <%=articleRow.get("body")%> 넣기
+
+
+
+
+지금 문제인거 : DoUpdate 서블릿
+
+ArticleDoUpdateServlet.java:43
+java.lang.NumberFormatException: Cannot parse null string
+문자열을 숫자(int, double 등)로 변환하려 할 때, 변환 대상 문자열이 null 이어서 발생하는 예외
+
+그런데 <h1><%=articleRow.get("id")%> 번 게시글 수정</h1> 여기서는 값이 제대로 나오는데
+
+
+
