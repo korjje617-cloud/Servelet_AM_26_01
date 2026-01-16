@@ -41,23 +41,31 @@ public class MemberDoJoinServlet extends HttpServlet {
 
 			String loginId = request.getParameter("loginId");
 			String loginPw = request.getParameter("loginPw");
-			String loginPwContirm = request.getParameter("loginPwConfirm");	
 			String name = request.getParameter("name");
-			
-			SecSql sql = SecSql.from("INSERT INTO Member");
-			sql.append("regDate = NOW(),");
+
+			SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+			sql.append("FROM `member`");
+			sql.append("WHERE loginId = ?;", loginId);
+
+			boolean isJoinableLoginId = DBUtil.selectRowIntValue(conn, sql) == 0;
+
+			if (isJoinableLoginId == false) {
+				response.getWriter().append(String
+						.format("<script>alert('%s는 이미 사용중'); history.back();</script>", loginId));
+				return;
+			}
+
+			sql = SecSql.from("INSERT INTO `member`");
+			sql.append("SET regDate = NOW(),");
 			sql.append("loginId = ?,", loginId);
-			sql.append("loginPw = ?;", loginPw);
+			sql.append("loginPw = ?,", loginPw);
 			sql.append("`name` = ?;", name);
-			
 
-			int id = DBUtil.insert(conn, sql);<<<<<<
-			System.out.println(1);
+			int id = DBUtil.insert(conn, sql);
 
-			response.getWriter()
-					.append(String.format("<script>alert('%s 님 가입이 완료 되었습니다'); location.replace('list');</script>", name));
-			
-			
+			response.getWriter().append(
+					String.format("<script>alert('%d번 회원이 가입 완료'); location.replace('../article/list');</script>", id));
+
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
