@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/article/doUpdate")
-public class ArticleDoUpdateServlet extends HttpServlet {
+@WebServlet("/article/modify")
+public class ArticleModifyServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -39,7 +39,7 @@ public class ArticleDoUpdateServlet extends HttpServlet {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공");
-			
+
 			int id = Integer.parseInt(request.getParameter("id"));
 
 			SecSql sql = SecSql.from("SELECT *");
@@ -47,13 +47,14 @@ public class ArticleDoUpdateServlet extends HttpServlet {
 			sql.append("WHERE id = ?", id);
 
 			Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
+			
+			if(articleRow == null) {
+				//todo
+			}
 
 			request.setAttribute("articleRow", articleRow);
 
-			response.getWriter()
-					.append(String.format("<script>alert('%d번 글이 수정됨'); location.replace('list');</script>", id));
-
-			request.getRequestDispatcher("/jsp/article/update.jsp").forward(request, response);
+			request.getRequestDispatcher("/jsp/article/modify.jsp").forward(request, response);
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
@@ -66,11 +67,6 @@ public class ArticleDoUpdateServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

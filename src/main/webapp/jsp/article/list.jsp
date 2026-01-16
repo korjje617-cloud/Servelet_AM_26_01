@@ -57,7 +57,7 @@ table>thead>tr>th, table>tbody>tr>td {
 					onclick="if(confirm('삭제하시겠습니까?') == false) {return false;}"
 					href="doDelete?id=<%=articleRow.get("id")%>">del</a></td>
 					
-				<td><a href="doUpdate?id=<%=articleRow.get("id")%>">수정</a></td>
+				<td><a href="modify?id=<%=articleRow.get("id")%>">수정</a></td>
 			</tr>
 			<%
 			}

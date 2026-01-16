@@ -23,13 +23,13 @@ table>thead>tr>th, table>tbody>tr>td {
 		<br />
 		
 		<div>
-			<input name="title" type="text" placeholder="제목을 입력하세요" />
+			<input name="title" type="text" placeholder="제목을 입력하세요" required />
 		</div>
 		
 		<br />
 		
 		<div>
-			<textarea name="body" style="" text" placeholder="내용을 입력하세요"></textarea>
+			<textarea name="body" style="" text" placeholder="내용을 입력하세요" required></textarea>
 		</div>
 		
 		<br />
