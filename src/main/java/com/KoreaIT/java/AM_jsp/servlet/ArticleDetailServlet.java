@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 import com.KoreaIT.java.AM_jsp.util.DBUtil;
@@ -24,8 +23,6 @@ public class ArticleDetailServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=UTF-8");
 
-		System.out.println(123);
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -44,8 +41,6 @@ public class ArticleDetailServlet extends HttpServlet {
 			response.getWriter().append("연결 성공");
 
 			int id = Integer.parseInt(request.getParameter("id"));
-
-//			String sql = String.format("SELECT * FROM article WHERE id = %d;", id);
 
 			SecSql sql = SecSql.from("SELECT *");
 			sql.append("FROM article");
@@ -68,6 +63,11 @@ public class ArticleDetailServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		doGet(request, response);
 	}
 
 }

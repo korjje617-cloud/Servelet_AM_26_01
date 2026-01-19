@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.KoreaIT.java.AM_jsp.util.DBUtil;
 import com.KoreaIT.java.AM_jsp.util.SecSql;
@@ -13,9 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/article/doModify")
-public class ArticleDoModifyServlet extends HttpServlet {
+@WebServlet("/member/doLogout")
+public class MemberDoLogoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -37,22 +39,14 @@ public class ArticleDoModifyServlet extends HttpServlet {
 
 		try {
 			conn = DriverManager.getConnection(url, user, password);
-			response.getWriter().append("연결 성공");
 
-			int id = Integer.parseInt(request.getParameter("id"));
+			HttpSession session = request.getSession();
+			session.removeAttribute("loginedMember");
+			session.removeAttribute("loginedMemberId");
+			session.removeAttribute("loginedMemberLoginId");
 
-			String title = request.getParameter("title");
-			String body = request.getParameter("body");
-
-			SecSql sql = SecSql.from("UPDATE article");
-			sql.append("SET title = ?,", title);
-			sql.append("`body` = ?", body);
-			sql.append("WHERE id = ?;", id);
-
-			DBUtil.update(conn, sql);
-
-			response.getWriter().append(
-					String.format("<script>alert('%d번 글 수정'); location.replace('detail?id=%d');</script>", id, id));
+			response.getWriter()
+					.append(String.format("<script>alert('로그아웃!'); location.replace('../article/list');</script>"));
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);

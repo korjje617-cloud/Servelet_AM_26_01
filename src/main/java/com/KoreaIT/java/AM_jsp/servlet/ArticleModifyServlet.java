@@ -51,7 +51,7 @@ public class ArticleModifyServlet extends HttpServlet {
 			if(articleRow == null) {
 				response.getWriter()
 				.append(String.format("<script>alert('%d번 글은 없습니다'); location.replace('list');</script>", id));
-			}
+			} // 테스트 안해봄
 
 			request.setAttribute("articleRow", articleRow);
 
@@ -68,6 +68,12 @@ public class ArticleModifyServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doGet(request, response);
 	}
 
 }

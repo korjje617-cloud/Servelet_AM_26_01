@@ -51,7 +51,7 @@ public class MemberDoJoinServlet extends HttpServlet {
 
 			if (isJoinableLoginId == false) {
 				response.getWriter().append(String
-						.format("<script>alert('%s는 이미 사용중'); history.back();</script>", loginId));
+						.format("<script>alert('%s는 이미 사용중인 아이디'); history.back();</script>", loginId));
 				return;
 			}
 
@@ -64,7 +64,7 @@ public class MemberDoJoinServlet extends HttpServlet {
 			int id = DBUtil.insert(conn, sql);
 
 			response.getWriter().append(
-					String.format("<script>alert('%d번 회원이 가입 완료'); location.replace('../article/list');</script>", id));
+					String.format("<script>alert('%d번 회원 가입 완료'); location.replace('../article/list');</script>", id));
 
 
 		} catch (SQLException e) {

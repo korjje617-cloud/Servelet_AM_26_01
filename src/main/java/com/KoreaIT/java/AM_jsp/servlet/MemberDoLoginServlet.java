@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.KoreaIT.java.AM_jsp.util.DBUtil;
 import com.KoreaIT.java.AM_jsp.util.SecSql;
@@ -13,9 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/article/doModify")
-public class ArticleDoModifyServlet extends HttpServlet {
+@WebServlet("/member/doLogin")
+public class MemberDoLoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -39,20 +41,36 @@ public class ArticleDoModifyServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공");
 
-			int id = Integer.parseInt(request.getParameter("id"));
+			String loginId = request.getParameter("loginId");
+			String loginPw = request.getParameter("loginPw");
 
-			String title = request.getParameter("title");
-			String body = request.getParameter("body");
+			SecSql sql = SecSql.from("SELECT *");
+			sql.append("FROM `member`");
+			sql.append("WHERE loginId = ?;", loginId);
 
-			SecSql sql = SecSql.from("UPDATE article");
-			sql.append("SET title = ?,", title);
-			sql.append("`body` = ?", body);
-			sql.append("WHERE id = ?;", id);
+			Map<String, Object> memberRow = DBUtil.selectRow(conn, sql);
 
-			DBUtil.update(conn, sql);
+			System.out.println(memberRow);
 
-			response.getWriter().append(
-					String.format("<script>alert('%d번 글 수정'); location.replace('detail?id=%d');</script>", id, id));
+			if (memberRow.isEmpty()) {
+				response.getWriter().append(String
+						.format("<script>alert('%s는 없는 회원입니다'); location.replace('../member/login')</script>", loginId));
+				return;
+			}
+
+			if (memberRow.get("loginPw").equals(loginPw) == false) {
+				response.getWriter()
+						.append(String.format("<script>alert('비밀번호가 틀렸습니다'); location.replace('../member/login')</script>"));
+				return;
+			}
+
+			HttpSession session = request.getSession();
+			session.setAttribute("loginedMember", memberRow);
+			session.setAttribute("loginedMemberId", memberRow.get("id"));
+			session.setAttribute("loginedMemberLoginId", memberRow.get("LoginId"));
+
+			response.getWriter().append(String.format(
+					"<script>alert('%s님 로그인'); location.replace('../article/list');</script>", memberRow.get("name")));
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
