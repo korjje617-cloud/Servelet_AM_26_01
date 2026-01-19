@@ -64,6 +64,7 @@ table>thead>tr>th, table>tbody>tr>td {
 				<th>번호</th>
 				<th>날짜</th>
 				<th>제목</th>
+				<th>작성자</th>
 				<th>내용</th>
 				<th>삭제</th>
 				<th>수정</th>
@@ -78,7 +79,9 @@ table>thead>tr>th, table>tbody>tr>td {
 				<td><%=articleRow.get("regDate")%></td>
 
 				<td><a href="detail?id=<%=articleRow.get("id")%>"><%=articleRow.get("title")%></a></td>
-
+				
+				<td><%=articleRow.get("name")%></td>
+				
 				<td><%=articleRow.get("body")%></td>
 				<td><a
 						onclick="if(confirm('삭제하시겠습니까?') == false) {return false;}"
