@@ -54,13 +54,13 @@ public class MemberDoLoginServlet extends HttpServlet {
 
 			if (memberRow.isEmpty()) {
 				response.getWriter().append(String
-						.format("<script>alert('%s는 없는 회원입니다'); location.replace('../member/login')</script>", loginId));
+						.format("<script>alert('%s는 없는애야'); location.replace('../member/login')</script>", loginId));
 				return;
 			}
 
 			if (memberRow.get("loginPw").equals(loginPw) == false) {
 				response.getWriter()
-						.append(String.format("<script>alert('비밀번호가 틀렸습니다'); location.replace('../member/login')</script>"));
+						.append(String.format("<script>alert('비번 틀렸어'); location.replace('../member/login')</script>"));
 				return;
 			}
 
@@ -70,7 +70,7 @@ public class MemberDoLoginServlet extends HttpServlet {
 			session.setAttribute("loginedMemberLoginId", memberRow.get("LoginId"));
 
 			response.getWriter().append(String.format(
-					"<script>alert('%s님 로그인'); location.replace('../article/list');</script>", memberRow.get("name")));
+					"<script>alert('%s님 로그인됨'); location.replace('../s/home/main');</script>", memberRow.get("name")));
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
