@@ -30,29 +30,8 @@ table>thead>tr>th, table>tbody>tr>td {
 	<a href="../home/main">메인으로 이동</a>
 
 	<h1>게시글 목록</h1>
-	<div><%=loginedMemberId%>번 회원 로그인 중
-	</div>
-	<div><%=loginedMember%></div>
-	<%
-	if (isLogined) {
-	%>
-	<div>
-		<a href="../member/doLogout">로그아웃</a>
-		<a href="write">글쓰기</a>
-	</div>
-	<%
-	}
-	%>
-
-	<%
-	if (!isLogined) {
-	%>
-	<div>
-		<a href="../member/login">로그인</a>
-	</div>
-	<%
-	}
-	%>
+	
+	<%@ include file="../part/top_bar.jspf"%>
 
 	총 게시글 갯수 :
 	<%=totalCnt%>
@@ -79,13 +58,13 @@ table>thead>tr>th, table>tbody>tr>td {
 				<td><%=articleRow.get("regDate")%></td>
 
 				<td><a href="detail?id=<%=articleRow.get("id")%>"><%=articleRow.get("title")%></a></td>
-				
+
 				<td><%=articleRow.get("name")%></td>
-				
+
 				<td><%=articleRow.get("body")%></td>
 				<td><a
-						onclick="if(confirm('삭제하시겠습니까?') == false) {return false;}"
-						href="doDelete?id=<%=articleRow.get("id")%>">del</a></td>
+					onclick="if(confirm('삭제하시겠습니까?') == false) {return false;}"
+					href="doDelete?id=<%=articleRow.get("id")%>">del</a></td>
 				<td><a href="modify?id=<%=articleRow.get("id")%>">edit</a></td>
 			</tr>
 			<%

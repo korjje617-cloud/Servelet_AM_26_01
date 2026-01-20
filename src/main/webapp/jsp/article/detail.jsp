@@ -16,11 +16,7 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 	<a href="../home/main">메인으로 이동</a>
 
 	<h1>게시글 상세보기</h1>
-
-
-
-
-	<div><%=articleRow%></div>
+	
 	<br />
 	<div>
 		번호 :
@@ -39,7 +35,7 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 		<%=articleRow.get("body")%></div>
 
 	<div>
-		<a style="color: green" href="list">리스트로 이동</a>
+		<a style="color: green" href="list">리스트로 돌아가기</a>
 	</div>
 
 	<!-- 	<div> -->
